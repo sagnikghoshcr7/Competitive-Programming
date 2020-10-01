@@ -2,7 +2,6 @@
 using namespace std;
 void insertionSort(int *input, int size)
 {
-    // Write your code here
     // First loop will be for traversing array from 1 to n;
     for(int i=1;i<size;i++)
     {
