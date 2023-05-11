@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class A_Soft_Drinking {
+public class A_Array {
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
     private static int arrMin(int[] A) {return Arrays.stream(A).min().getAsInt();}
     private static int arrSum(int[] A) {return Arrays.stream(A).sum();}
@@ -32,13 +32,28 @@ public class A_Soft_Drinking {
     // System.out.println(df.format(input_Decimal_Here));
 
     static Scanner sc = new Scanner(System.in);
-    public static void main(String[] args) { solver(); }
-    // public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) solver(); }
+    // public static void main(String[] args) { solver(); }
+    public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) solver(); }
 
     private static void solver() {
-        int[] A = new int[8];		
-		for(int i=0; i<8; i++) A[i] = sc.nextInt();
-		
-		System.out.println(Math.min(Math.min(A[1] * A[2] / A[6], A[3] * A[4]), A[5] / A[7]) / A[0]);
+        int n = sc.nextInt();
+        int a[] = new int[n];
+        for (int i = 0; i < n; i++) a[i] = sc.nextInt();
+
+        Arrays.sort(a);
+        System.out.println("1 " + a[0]);
+        if (a[n - 1] > 0) {
+            System.out.println("1 " + a[n - 1]);
+            System.out.print(n - 2 + " ");
+            for (int i = 1; i < n - 1; i++) {
+                System.out.print(a[i] + " ");
+            }
+        } else {
+            System.out.println("2 " + a[1] + " " + a[2]);
+            System.out.print(n - 3 + " ");
+            for (int i = 3; i < n; i++) {
+                System.out.print(a[i] + " ");
+            }
+        }
     }
 }
