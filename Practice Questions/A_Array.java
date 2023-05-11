@@ -26,34 +26,42 @@ public class A_Array {
     private static void prtArrWithSpce(int[] A) {for(int i=0;i<A.length;i++)System.out.print(A[i]+" ");}
     private static void prtArrWithSpce(int[] A, int s) {for(int i=s;i<A.length;i++)System.out.print(A[i]+" ");}
     private static void prtArrWithSpce(int[] A, int s, int e) {for(int i=s;i<=e;i++)System.out.print(A[i]+" ");}
+    private static void print(List<Integer> list){
+        System.out.print(list.size()+" ");
+        for(int i : list)
+            System.out.print(i+" ");
+        System.out.println();
+    }
 
     // DecimalFormat df = new DecimalFormat("#.###");
     // DecimalFormat df = new DecimalFormat(); df.setMaximumFractionDigits(12);
     // System.out.println(df.format(input_Decimal_Here));
 
     static Scanner sc = new Scanner(System.in);
-    // public static void main(String[] args) { solver(); }
-    public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) solver(); }
+    public static void main(String[] args) { solver(); }
+    // public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) solver(); }
 
     private static void solver() {
         int n = sc.nextInt();
-        int a[] = new int[n];
-        for (int i = 0; i < n; i++) a[i] = sc.nextInt();
-
-        Arrays.sort(a);
-        System.out.println("1 " + a[0]);
-        if (a[n - 1] > 0) {
-            System.out.println("1 " + a[n - 1]);
-            System.out.print(n - 2 + " ");
-            for (int i = 1; i < n - 1; i++) {
-                System.out.print(a[i] + " ");
-            }
-        } else {
-            System.out.println("2 " + a[1] + " " + a[2]);
-            System.out.print(n - 3 + " ");
-            for (int i = 3; i < n; i++) {
-                System.out.print(a[i] + " ");
-            }
+        List<Integer> odd = new ArrayList<>();
+        List<Integer> even = new ArrayList<>();
+        List<Integer> zeros = new ArrayList<>();
+        while (n-- > 0) {
+            int x = sc.nextInt();
+            if (x == 0) zeros.add(0);
+            else if (x > 0) even.add(x);
+            else odd.add(x);
         }
+        
+        if (even.size() == 0) {
+            even.add(odd.remove(0));
+            even.add(odd.remove(0));
+        }
+
+        if (odd.size() % 2 == 0) zeros.add(odd.remove(0));
+        
+        print(odd);
+        print(even);
+        print(zeros);
     }
 }
