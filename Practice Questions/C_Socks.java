@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class A_Probably_English {
+public class C_Socks {
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
     private static int arrMin(int[] A) {return Arrays.stream(A).min().getAsInt();}
     private static int arrSum(int[] A) {return Arrays.stream(A).sum();}
@@ -44,15 +44,39 @@ public class A_Probably_English {
     // public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) sagnik(); }
 
     private static void sagnik() {
-        int n = sc.nextInt();
+        int n   = sc.nextInt();
+        int[] a = new int[n];
         for (int i = 0; i < n; i++) {
-            String w = sc.next();
-            if (w.equals("and") || w.equals("not") || w.equals("that") || w.equals("the") || w.equals("you")) {
-                System.out.println("Yes");
-                return;
+            a[i] = sc.nextInt();
+        }
+ 
+        Arrays.sort(a);
+ 
+        int result = 0;
+        for (int i = 0; i < n - 1; i++) {
+            int pos = i + 1;
+            while (pos < n && a[i] == a[pos]) {
+                i += 2;
+                pos += 2;
+                result++;
             }
         }
-        System.out.println("No");
-        sc.close();
+ 
+        System.out.println(result);
     }
+
+    // My RE/TLE Solution
+    // private static void sagnik() {
+    //     int n = sc.nextInt();
+    //     int[] A = new int[n];
+    //     for (int i=0; i<n; i++) A[i] = sc.nextInt();
+ 
+    //     long[] map = new long[arrMax(A)+1]; int count = 0;
+ 
+    //     for (int i : A) {
+    //         if (map[i] == 0) map[i]++;
+    //         else if (map[i] == 1) {map[i]--; count++;}
+    //     }
+    //     System.out.println(count);
+    // }
 }

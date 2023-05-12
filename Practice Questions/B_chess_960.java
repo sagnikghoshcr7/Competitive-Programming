@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class A_Probably_English {
+public class B_chess_960 {
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
     private static int arrMin(int[] A) {return Arrays.stream(A).min().getAsInt();}
     private static int arrSum(int[] A) {return Arrays.stream(A).sum();}
@@ -44,15 +44,22 @@ public class A_Probably_English {
     // public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) sagnik(); }
 
     private static void sagnik() {
-        int n = sc.nextInt();
-        for (int i = 0; i < n; i++) {
-            String w = sc.next();
-            if (w.equals("and") || w.equals("not") || w.equals("that") || w.equals("the") || w.equals("you")) {
-                System.out.println("Yes");
-                return;
-            }
-        }
-        System.out.println("No");
-        sc.close();
+        String str = sc.nextLine();
+    	sc.close();
+    	
+    	boolean yes = true;
+    	
+    	int fiofB = str.indexOf("B");
+    	int liofB = str.lastIndexOf("B");
+    	
+    	if (fiofB % 2 == liofB % 2) yes = false;
+    	
+    	int fiofR = str.indexOf("R");
+    	int liofR = str.lastIndexOf("R");
+    	int iofK = str.indexOf("K");
+    	
+    	if (!(fiofR < iofK && iofK < liofR)) yes = false;
+    	
+    	System.out.println(yes ? "Yes" : "No");
     }
 }
