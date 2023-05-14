@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class A_One_and_Two {
+public class B_T_primes {
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
     private static int arrMin(int[] A) {return Arrays.stream(A).min().getAsInt();}
     private static int arrSum(int[] A) {return Arrays.stream(A).sum();}
@@ -41,28 +41,46 @@ public class A_One_and_Two {
     static Scanner sc = new Scanner(System.in);
     static PrintWriter out = new PrintWriter(System.out);
 
-    // public static void main(String[] args) { sagnik(); }
-    public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) sagnik(); }
+    public static void main(String[] args) { sagnik(); }
+    // public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) sagnik(); }
 
-    private static void sagnik() {
-        int n = sc.nextInt();
-        int arr[] = new int[n];
-        int two = 0;
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-            if (arr[i] == 2) two++;
-        }
-        int preTwo = 0;
-        for (int i = 0; i < n; i++) {
-            if (arr[i] == 2) preTwo++;
-            int left = preTwo;
-            int right = two - preTwo;
-            if (left == right) {
-                System.out.println(i+1);
-                return;
+    public static int countPrimeInRange(int n, boolean isPrime[]) {
+        int cnt = 0;
+        for (int i = 2; i * i <= n; i++) {
+            if (isPrime[i]) {
+                for (int j = i * 2; j <= n; j += i) {
+                    isPrime[j] = false;
+                }
             }
         }
+        for (int i = 2; i <= n; i++) {
+            if (isPrime[i]) {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
 
-        System.out.println(-1);
+    private static void sagnik() {
+        boolean prime[] = new boolean[(int) 1e6 + 1];
+        Arrays.fill(prime, true);
+        prime[1] = false;
+        countPrimeInRange((int) 1e6, prime);
+        int t = sc.nextInt();
+        loop:
+        while (t-- > 0) {
+            long n = sc.nextLong();
+            long sqrt = (long) Math.sqrt(n);
+            if (sqrt * sqrt == n) {
+                int sq = (int) sqrt;
+                if (prime[sq]) {
+                    System.out.println("YES");
+                } else {
+                    System.out.println("NO");
+                }
+            } else {
+                System.out.println("NO");
+            }
+        }
     }
 }
