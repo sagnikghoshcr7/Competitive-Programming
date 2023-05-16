@@ -1,1 +1,0 @@
-call cd.. && call cd.. && call del /S *.class

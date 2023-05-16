@@ -41,8 +41,8 @@ public class C_AtCoder_Cards {
     static Scanner sc = new Scanner(System.in);
     static PrintWriter out = new PrintWriter(System.out);
 
-    // public static void main(String[] args) { sagnik(); }
-    public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) sagnik(); }
+    public static void main(String[] args) { sagnik(); }
+    // public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) sagnik(); }
 
     private static void sagnik() {
         String s = sc.next();
