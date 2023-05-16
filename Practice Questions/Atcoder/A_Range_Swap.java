@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class Main {
+public class A_Range_Swap {
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
     private static int arrMin(int[] A) {return Arrays.stream(A).min().getAsInt();}
     private static int arrSum(int[] A) {return Arrays.stream(A).sum();}
@@ -58,10 +58,20 @@ public class Main {
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
 
-    // public static void main(String[] args) throws IOException { sagnik(); }
-    public static void main(String[] args) throws IOException { int t = sc.nextInt(); while(t-->0) sagnik(); }
+    public static void main(String[] args) throws IOException { sagnik(); }
+    // public static void main(String[] args) throws IOException { int t = sc.nextInt(); while(t-->0) sagnik(); }
 
     private static void sagnik() throws IOException {
-        int n = sc.nextInt();
+        int n = fs.nextInt(), p = fs.nextInt(), q = fs.nextInt(), r = fs.nextInt(), s = fs.nextInt();
+        int[] a = fs.setArray(n);
+
+        for (int i = p; i <= q; i++) {
+            int t = a[i - 1];
+            a[i - 1] = a[r - 1];
+            a[r - 1] = t;
+            r++;
+        }
+
+        prtArrWithSpce(a);
     }
 }
