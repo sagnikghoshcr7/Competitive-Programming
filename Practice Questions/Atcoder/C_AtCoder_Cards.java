@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class B_Fill_the_Gaps {
+public class C_AtCoder_Cards {
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
     private static int arrMin(int[] A) {return Arrays.stream(A).min().getAsInt();}
     private static int arrSum(int[] A) {return Arrays.stream(A).sum();}
@@ -25,8 +25,8 @@ public class B_Fill_the_Gaps {
     private static int lcm(int a, int b) {return (a*b)/gcd(a, b);}
     private static int[] listToArr(List<Integer> x) {return x.stream().mapToInt(i -> i).toArray();}
 
-    public static int[] setArray(int n) {int A[]=new int[n]; for(int i=0;i<n;i++) A[i]=sc.nextInt(); return A;}
-    public static long[] lsetArray(int n) {long A[]=new long[n]; for(int i=0;i<n;i++) A[i]=sc.nextLong(); return A;}
+    private static int[] setArray(int n) {int A[]=new int[n]; for(int i=0;i<n;i++) A[i]=sc.nextInt(); return A;}
+    private static long[] lsetArray(int n) {long A[]=new long[n]; for(int i=0;i<n;i++) A[i]=sc.nextLong(); return A;}
 
     private static void prtList(List<Integer> x) {for(int i : x) {System.out.print(i+" ");}}
     private static void prtArr(int[] A) {System.out.println(Arrays.toString(A));}
@@ -41,25 +41,38 @@ public class B_Fill_the_Gaps {
     static Scanner sc = new Scanner(System.in);
     static PrintWriter out = new PrintWriter(System.out);
 
-    public static void main(String[] args) { sagnik(); }
-    // public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) sagnik(); }
+    // public static void main(String[] args) { sagnik(); }
+    public static void main(String[] args) { int t = sc.nextInt(); while(t-->0) sagnik(); }
 
     private static void sagnik() {
-        int n = sc.nextInt();
-        int[] A = new int[n + 1];
-        for (int i = 1; i <= n; i++) A[i] = sc.nextInt();
-
-        for (int i = 1; i < n; i++) {
-            if (A[i + 1] - A[i] > 1) {
-                for (int j = A[i]; j < A[i + 1]; j++)
-                    System.out.print(j + " ");
-            } else if (A[i] - A[i + 1] > 1) {
-                for (int j = A[i]; j > A[i + 1]; j--)
-                    System.out.print(j + " ");
-            } else {
-                System.out.print(A[i] + " ");
-            }
-        }
-        System.out.println(A[n]);
+        String s = sc.next();
+			String t = sc.next();
+			
+			int sat = 0, tat = 0;
+			int[] scnt = new int[26], tcnt = new int[26];
+			
+			for(int i = 0; i < s.length(); ++i) {
+				if(s.charAt(i) == '@') ++sat;
+				else scnt[s.charAt(i) - 'a']++;
+				
+				if(t.charAt(i) == '@') ++tat;
+				else tcnt[t.charAt(i) - 'a']++;
+				
+			}
+			
+			int diff = 0;
+			for(int i = 0; i < 26; ++i) {
+				if(i != 0 && i != 2 && i != 3 && i != 4  && i != 14 && i != 17 && i != 19) {
+					if(scnt[i] != tcnt[i]) {
+						System.out.println("No");
+						return;
+					}
+				} else {
+					diff += Math.abs(scnt[i] - tcnt[i]);
+				}
+			}
+			
+			if(diff <= sat + tat) System.out.println("Yes");
+			else System.out.println("No");
     }
 }

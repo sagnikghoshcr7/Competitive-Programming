@@ -1,1 +1,1 @@
-call cd.. && call cd.. && call git add . && git commit -m "another easy peasy solution"
+call cd.. && call cd.. && call del /S *.class && call git add . && git commit -m "another easy peasy solution"
