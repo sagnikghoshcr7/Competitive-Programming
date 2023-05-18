@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class A implements Template6 {
+public class Template6 implements Runnable {
 
     public void run() {
         int n = nextInt();
@@ -59,7 +59,7 @@ public class A implements Template6 {
     public static void main(String[] args) {
         br = new BufferedReader(new InputStreamReader(System.in));
         out = new PrintWriter(System.out);
-        (new Thread(new A())).start();
+        (new Thread(new Template6())).start();
     }
 
     private void loadLine() {
