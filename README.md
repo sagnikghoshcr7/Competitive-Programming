@@ -10,3 +10,4 @@
 - [CSES](https://cses.fi/problemset/)
 - [Kattis](https://open.kattis.com/problems)
 - [Timus](https://acm.timus.ru/problemset.aspx)
+- [Project Euler](https://projecteuler.net/archives)
