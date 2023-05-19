@@ -1,7 +1,8 @@
-# Competitive-Templates
-Templates of commonly used algorithms in C++ curated for competitive programming challenges to increase efficiency.
+# Competitive Programming
 
-## Contributers
-<a href="https://github.com/sagnikghoshcr7/Competitive-Templates/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=sagnikghoshcr7/Competitive-Templates" />
-</a>
+## Practice Websites
+- [Atcoder](https://atcoder.jp/)
+  - [Kenkoooo Ladder](https://kenkoooo.com/atcoder/#/table/)
+- [Codeforces](https://codeforces.com/)
+  - [A2OJ Ladder](https://earthshakira.github.io/a2oj-clientside/server/Ladders.html)
+- [Codechef](https://www.codechef.com/)
