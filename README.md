@@ -10,3 +10,8 @@
 - [CSES](https://cses.fi/problemset/)
 - [Kattis](https://open.kattis.com/problems)
 - [Timus](https://acm.timus.ru/problemset.aspx)
+- [DMOJ](https://dmoj.ca/problems/)
+- [Project Euler](https://projecteuler.net/archives)
+
+## Other Resources
+- [OEIS](https://oeis.org/) A website which tells you about the upcoming Integer Sequence. It's just amazing. Give It a Try.
