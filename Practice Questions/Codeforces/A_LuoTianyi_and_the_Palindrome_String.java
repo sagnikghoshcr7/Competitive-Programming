@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class A_Attack {
+public class A_LuoTianyi_and_the_Palindrome_String {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -34,13 +34,19 @@ public class A_Attack {
     static int cnt=0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        long a = fs.nextLong();
-        long b = fs.nextLong();
-        out.print(a%b == 0 ? a/b : (a/b)+1);
+        String s = fs.next();
+        boolean check = false;
+        for (int j=0; j<s.length() - 1; ++j) {
+            if (s.charAt(j) != s.charAt(j + 1)) {
+                check = true;
+                break;
+            }
+        }
+        out.println(check ? s.length() - 1 : -1);
         out.flush();
     }
 
-    public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); }  // Make t = 1 baby
+    public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); }  // Make t = 1 baby
 
     // dont worry bout me, i'm not high
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}

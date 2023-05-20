@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class A_Attack {
+public class B_Find_snuke {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -34,10 +34,37 @@ public class A_Attack {
     static int cnt=0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        long a = fs.nextLong();
-        long b = fs.nextLong();
-        out.print(a%b == 0 ? a/b : (a/b)+1);
-        out.flush();
+        var H = fs.nextInt();
+		var W = fs.nextInt();
+		var S = new char[H][W];
+		for (var i = 0; i < H; i++) S[i] = fs.next().toCharArray();
+		sc.close();
+		int[] dy = {-1, -1, 0, 1, 1, 1, 0, -1};
+		int[] dx = {0, 1, 1, 1, 0, -1, -1, -1};
+		char[] str = "snuke".toCharArray();
+		loop1:
+		for (var i = 0; i < H; i++) {
+			for (var j = 0; j < W; j++) {
+				for (var k = 0; k < 8; k++) {
+					var ans = new StringBuilder();
+					var isSunuke = true;
+					for (var l = 0; l < 5; l++) {
+						var y = i + dx[k] * l;
+						var x = j + dy[k] * l;
+						if (y < 0 || H <= y || x < 0 || W <= x || S[y][x] != str[l]) {
+							isSunuke = false;
+							break;
+						}
+						ans.append(y + 1).append(" ").append(x + 1).append("\n");
+					}
+					if (isSunuke) {
+						out.println(ans);
+						out.flush();
+						break loop1;
+					}
+				}
+			}
+		}
     }
 
     public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); }  // Make t = 1 baby
