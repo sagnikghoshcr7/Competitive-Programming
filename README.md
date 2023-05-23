@@ -5,6 +5,7 @@
   - [Kenkoooo Ladder](https://kenkoooo.com/atcoder/#/table/)
 - [Codeforces](https://codeforces.com/)
   - [A2OJ Ladder](https://earthshakira.github.io/a2oj-clientside/server/Ladders.html)
+  - [A2OJ Ladder](https://the-a2oj.vercel.app/)
 - [Codechef](https://www.codechef.com/)
 - [SPOJ](https://www.spoj.com/problems)
 - [CSES](https://cses.fi/problemset/)
