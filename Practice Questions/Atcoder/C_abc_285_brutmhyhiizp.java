@@ -41,20 +41,6 @@ public class C_abc_285_brutmhyhiizp {
             res *= 26;
             res += ch - 'A' + 1;
         }
-
-        /**
-         * ! Go through this code & problem again
-         * ! Go through this code & problem again
-         * ! Go through this code & problem again
-         * ! Go through this code & problem again
-         * ! Go through this code & problem again
-         * ! Go through this code & problem again
-         * ! Go through this code & problem again
-         * ! Go through this code & problem again
-         * ! Go through this code & problem again
-         * ! Go through this code & problem again
-         */
- 
         out.println(res);
         out.flush();
     }
