@@ -34,22 +34,21 @@ public class B_Rectangle_Detection {
     static int cnt=0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        int a, b, c, d;
-        a = b = c = d = Integer.MAX_VALUE;
+        int a = Integer.MAX_VALUE, b = Integer.MIN_VALUE, c = Integer.MAX_VALUE, d = Integer.MIN_VALUE;
 
-		for(int i=0;i<10;i++){
-		    String s=fs.next();
-		    for(int j=0;j<10;j++){
-		        if(s.charAt(j)=='#'){
-		            a=Math.min(a,i+1);
-		            b=Math.max(b,i+1);
-		            c=Math.min(c,j+1);
-		            d=Math.max(d,j+1);
-		        }
-		    }
-		}
-		out.println(a+" "+b);
-		out.println(c+" "+d);
+        for (int i = 0; i < 10; i++) {
+            String s = fs.next();
+            for (int j = 0; j < 10; j++) {
+                if (s.charAt(j) == '#') {
+                    a = Math.min(a, i + 1);
+                    b = Math.max(b, i + 1);
+                    c = Math.min(c, j + 1);
+                    d = Math.max(d, j + 1);
+                }
+            }
+        }
+        out.println(a + " " + b);
+        out.println(c + " " + d);
         out.flush();
     }
 
