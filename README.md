@@ -1,7 +1,7 @@
 # Competitive Programming
-<img align="left" src="https://imagizer.imageshack.com/img924/3669/EgjC01.gif" height="220px">
-<img align="left" src="https://imagizer.imageshack.com/img923/50/SILX3K.gif" height="220px">
-<img align="left" src="https://imagizer.imageshack.com/img922/9467/bPXZxv.gif" height="220px"">
+<img align="left" src="https://imagizer.imageshack.com/img924/3669/EgjC01.gif" height="200px">
+<img align="left" src="https://imagizer.imageshack.com/img923/50/SILX3K.gif" height="200px">
+<img align="left" src="https://imagizer.imageshack.com/img922/9467/bPXZxv.gif" height="200px"">
 
 <br />
 <br />
