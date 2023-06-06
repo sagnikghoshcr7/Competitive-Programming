@@ -28,18 +28,12 @@ public class A_Compare_T_Shirt_Sizes {
         char l1 = one.charAt(one.length() - 1);
         char l2 = two.charAt(two.length() - 1);
         if(l1==l2) {
-            if(x1==x2)
-                System.out.println("=");
-            else if((x1>x2 && l1=='S') || (x1<x2 && l1=='L'))
-                System.out.println("<");
-            else
-                System.out.println(">");
+            if(x1==x2) System.out.println("=");
+            else if((x1>x2 && l1=='S') || (x1<x2 && l1=='L')) System.out.println("<");
+            else System.out.println(">");
         }
-        else if(l1=='S' && l2!='S')
-            System.out.println("<");
-        else if(l1=='M' && l2=='L')
-            System.out.println("<");
-        else
-            System.out.println(">");
+        else if(l1=='S' && l2!='S') System.out.println("<");
+        else if(l1=='M' && l2=='L') System.out.println("<");
+        else System.out.println(">");
     }
 }
