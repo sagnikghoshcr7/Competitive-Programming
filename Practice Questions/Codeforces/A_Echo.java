@@ -12,19 +12,13 @@
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.function.Consumer;
 import java.util.stream.*;
-
-import javafx.beans.binding.When;
-import javafx.scene.web.HTMLEditorSkin.Command;
-
 import java.lang.*;
 import java.math.BigInteger;
-import java.sql.Time;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class A_Bar {
+public class A_Echo {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -41,25 +35,13 @@ public class A_Bar {
 
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
-        int ans=0;
-        String s;
-        String[] a={"ABSINTH","BEER", "BRANDY", "CHAMPAGNE","GIN", "RUM", "SAKE", "TEQUILA", "VODKA", "WHISKEY", "WINE"};
- 
-        for (int i = 0; i < n; i++) {
-            s = fs.next();
-            
-            if (s.charAt(0)>='0' && s.charAt(0)<='9') {
-                int val=Integer.parseInt(s);
-                if (val<18) ans++;
-                continue;
-            }
-
-            for (int j = 0; j < a.length; j++) {
-                if (s.equals(a[j])) {ans++; break;}
-            }
+        String s = fs.next();
+        String res = "";
+        for(int i=0; i<n; i++) {
+            res += s.charAt(i);
+            res += s.charAt(i);
         }
-        
-        out.print(ans);
+        out.print(res);        
         out.flush();
     }
 
