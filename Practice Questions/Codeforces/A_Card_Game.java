@@ -1,3 +1,15 @@
+// JAI SHREE RAM
+/*
+
+░██████╗░█████╗░░██████╗░███╗░░██╗██╗██╗░░██╗░██████╗░██╗░░██╗░█████╗░░██████╗██╗░░██╗░█████╗░██████╗░███████╗
+██╔════╝██╔══██╗██╔════╝░████╗░██║██║██║░██╔╝██╔════╝░██║░░██║██╔══██╗██╔════╝██║░░██║██╔══██╗██╔══██╗╚════██║
+╚█████╗░███████║██║░░██╗░██╔██╗██║██║█████═╝░██║░░██╗░███████║██║░░██║╚█████╗░███████║██║░░╚═╝██████╔╝░░░░██╔╝
+░╚═══██╗██╔══██║██║░░╚██╗██║╚████║██║██╔═██╗░██║░░╚██╗██╔══██║██║░░██║░╚═══██╗██╔══██║██║░░██╗██╔══██╗░░░██╔╝░
+██████╔╝██║░░██║╚██████╔╝██║░╚███║██║██║░╚██╗╚██████╔╝██║░░██║╚█████╔╝██████╔╝██║░░██║╚█████╔╝██║░░██║░░██╔╝░░
+╚═════╝░╚═╝░░╚═╝░╚═════╝░╚═╝░░╚══╝╚═╝╚═╝░░╚═╝░╚═════╝░╚═╝░░╚═╝░╚════╝░╚═════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝░░╚═╝░░░
+
+*/
+
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.*;
@@ -6,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class D_Apple_Tree {
+public class A_Card_Game {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -19,60 +31,38 @@ public class D_Apple_Tree {
     static final int[] dx9 = { -1, -1, -1, 0, 0, 0, 1, 1, 1 }, dy9 = { -1, 0, 1, -1, 0, 1, -1, 0, 1 };
     static final double eps = 1e-10;
     static long [] larr = new long[100001];
-    static int tmpSum = 0;
-
-    static HashMap<Integer , Integer> child;
-    static int[] visited;
-    static HashMap<Integer, ArrayList<Integer>> map;
-
-    static int dfs(int node) {
-        int cnt = 0;
-
-        for (int child : map.get(node)) {
-            if (visited[child] == 0) {
-                visited[child] = 1;
-                cnt += dfs(child);
-            }
-        }
-        if (cnt == 0) {
-            child.put(node, 1);
-            return 1;
-        }
-        child.put(node, cnt);
-        return cnt;
-    }
+    static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        int n = fs.nextInt();
-        map = new HashMap<>();
-        for (int i = 0; i < n - 1; i++) {
-            int a = fs.nextInt();
-            int b = fs.nextInt();
-            if (!map.containsKey(a)) {
-                map.put(a, new ArrayList<>());
-            }
-            if (!map.containsKey(b)) {
-                map.put(b, new ArrayList<>());
-            }
+        char[] trump = fs.next().toCharArray();
+        char[] firstCard = fs.next().toCharArray();
+        char[] secondCard = fs.next().toCharArray();
 
-            map.get(a).add(b);
-            map.get(b).add(a);
+        Map<Character, Integer> map = Map.ofEntries(
+            Map.entry('6',1),
+            Map.entry('7',2),
+            Map.entry('8',3),
+            Map.entry('9',4),
+            Map.entry('T',5),
+            Map.entry('J',6),
+            Map.entry('Q',7),
+            Map.entry('K',8),
+            Map.entry('A',9)
+        );
+ 
+ 
+        if (firstCard[1] == secondCard[1]) {
+            int firstValue = map.get(firstCard[0]);
+            int secondValue = map.get(secondCard[0]);
+            if (firstValue > secondValue) out.print("YES");
+            else out.print("NO"); 
         }
-        child = new HashMap<>();
-        visited = new int[n + 1];
-        visited[1] = 1;
-        dfs(1);
-        int q = fs.nextInt();
-        while (q-- > 0) {
-            int l = fs.nextInt();
-            int r = fs.nextInt();
-            long ans = child.get(l);
-            ans *= child.get(r);
-            System.out.println(ans);
-        }
+        else if (firstCard[1] == trump[0]) out.print("YES");
+        else out.print("NO");
+        out.flush();
     }
 
-    public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); }  // Make t = 1 baby
+    public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); }  // Make t = 1 baby
 
     // dont worry bout me, i'm not high
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
