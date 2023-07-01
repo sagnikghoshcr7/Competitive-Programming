@@ -36,8 +36,7 @@ public class SpiralMatrix020723 {
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
         int m = fs.nextInt();
-        int[][] arr = new int[n][m];
-        for (int i=0; i<n; i++) for (int j=0; j<m; j++) arr[i][j] = fs.nextInt();
+        int[][] arr = fs.set2dArray(n, m);
 
         int frow = 0, fcol = 0, lrow = n-1, lcol = m-1;
         int count = n*m;
@@ -99,6 +98,8 @@ public class SpiralMatrix020723 {
 
     private static int[] setArray(int n) {int A[]=new int[n]; for(int i=0;i<n;i++) A[i]=sc.nextInt(); return A;}
     private static long[] lsetArray(int n) {long A[]=new long[n]; for(int i=0;i<n;i++) A[i]=sc.nextLong(); return A;}
+    private static int[][] set2dArray(int n, int m) {int[][] a = new int[n][m]; for (int i=0; i<n; i++) for (int j=0; j<m; j++) a[i][j] = sc.nextInt(); return a;}
+    private static long[][] lset2dArray(int n, int m) {long[][] a = new long[n][m]; for (int i=0; i<n; i++) for (int j=0; j<m; j++) a[i][j] = sc.nextLong(); return a;}
 
     private static void prtList(List<Integer> x) {for(int i : x) {System.out.print(i+" ");}}
     private static void prtArr(int[] A) {System.out.println(Arrays.toString(A));}
@@ -121,6 +122,8 @@ public class SpiralMatrix020723 {
 
         private static int[] setArray(int n) throws IOException {int[] a = new int[n]; for (int i=0; i<n; i++) a[i] = nextInt(); return a;}
         private static long[] lsetArray(int n) throws IOException {long a[] = new long[n]; for(int i=0; i<n; i++) a[i] = nextLong(); return a;}
+        private static int[][] set2dArray(int n, int m) throws IOException {int[][] a = new int[n][m]; for (int i=0; i<n; i++) for (int j=0; j<m; j++) a[i][j] = fs.nextInt(); return a;}
+        private static long[][] lset2dArray(int n, int m) throws IOException {long[][] a = new long[n][m]; for (int i=0; i<n; i++) for (int j=0; j<m; j++) a[i][j] = fs.nextLong(); return a;}
 
         private static int nextInt() throws IOException {return Integer.parseInt(next());}
         private static Long nextLong() throws IOException {return Long.parseLong(next());}
