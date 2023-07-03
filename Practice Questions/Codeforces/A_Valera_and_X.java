@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class A_Fox_and_Number_Game {
+public class A_Valera_and_X {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -35,11 +35,24 @@ public class A_Fox_and_Number_Game {
 
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
-        int[] a = fs.setArray(n);
-        Arrays.sort(a);
-        int answer = a[0];
-        for (int i=1; i<n; i++) answer = gcd(answer, a[i]);
-        out.print(n*answer);
+        char[][] arr = new char[n][n];
+        boolean r = true;
+        for (int i = 0; i < n; i++) {
+            arr[i] = fs.next().toCharArray();
+        }
+        char f = arr[0][0]; // X
+        char s = arr[0][1]; // X
+        r = (f != s) ? true : false;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == j || (i + j) == n - 1) {
+                    if (arr[i][j] != f) r = false;
+                } else {
+                    if (arr[i][j] != s) r = false;
+                }
+            }
+        }
+        out.print(r ? "YES" : "NO");
         out.flush();
     }
 
@@ -60,7 +73,7 @@ public class A_Fox_and_Number_Game {
     private static boolean isEven(int i) { return (i & 1) == 0; }
     private static boolean isVowel(char c) { return c=='a' || c=='A' || c=='e' || c=='E' || c=='i' || c=='I' || c=='o' || c=='O' || c=='u' || c=='U';}
     private static boolean isPrime(int x) {if(x==1) return false; for(int i=2; i*i<=x; i++){if(x%i==0) return false;} return true;}
-    public static boolean[] genSieve(int n) { boolean[] A = new boolean[n + 1]; Arrays.fill(A, true); A[0] = A[1] = false; for (int p = 2; p <= n; p++) if (A[p] && (long) p * p <= n) for (int i = p * p; i <= n; i += p) A[i] = false; return A; }
+    public static boolean[] genSieve(int n) {boolean[] A = new boolean[n+1]; Arrays.fill(A, true); A[0]=A[1]=false; for(int p=2; p<=n; p++) if(A[p] && (long)p*p<=n) for (int i=p*p; i<=n; i+=p) A[i]=false; return A;}
 
     private static int gcd(int a, int b) {if (b == 0) return a; return gcd(b, a % b);}
     private static int lcm(int a, int b) {return (a*b)/gcd(a, b);}
