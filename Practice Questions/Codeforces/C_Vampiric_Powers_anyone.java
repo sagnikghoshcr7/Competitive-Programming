@@ -32,23 +32,78 @@ public class C_Vampiric_Powers_anyone {
     static final double eps = 1e-10;
     static long [] larr = new long[100001];
     static int tmpSum = 0;
+    static final int INT_SIZE = 32;
+
+    private static class TrieNode {
+        int value;
+        TrieNode[] arr = new TrieNode[2];
+
+        public TrieNode() {
+            value = 0;
+            arr[0] = null;
+            arr[1] = null;
+        }
+    }
+
+    static TrieNode root;
+
+    private static void insert(int pre_xor) {
+        TrieNode temp = root;
+
+        for (int i = INT_SIZE - 1; i >= 0; i--) {
+            // Find current bit in given prefix
+            int val = (pre_xor & (1 << i)) >= 1 ? 1 : 0;
+
+            if (temp.arr[val] == null)
+                temp.arr[val] = new TrieNode();
+
+            temp = temp.arr[val];
+        }
+
+        // Store value at leaf node
+        temp.value = pre_xor;
+    }
+
+    private static int maxXOR(int arr[], int n) {
+
+        root = new TrieNode();
+        insert(0);
+
+        int result = Integer.MIN_VALUE;
+        int pre_xor = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            pre_xor = pre_xor ^ arr[i];
+            insert(pre_xor);
+
+            result = Math.max(result, query1(pre_xor));
+
+        }
+        return result;
+    }
+
+    private static int query1(int pre_xor) {
+        TrieNode temp = root;
+        for (int i = INT_SIZE - 1; i >= 0; i--) {
+            // Find current bit in given prefix
+            int val = (pre_xor & (1 << i)) >= 1 ? 1 : 0;
+
+            if (temp.arr[1 - val] != null)
+                temp = temp.arr[1 - val];
+
+            else if (temp.arr[val] != null)
+                temp = temp.arr[val];
+        }
+        return pre_xor ^ (temp.value);
+    }
 
     private static void sagnik() throws IOException {
-        int n = fs.nextInt();
-        int[] arr = new int[n+2];
-        for (int i=1; i<=n; i++) arr[i] = fs.nextInt();
-        int ans = 0;
-
-        for (int i=1; i<=n; i++) ans = Math.max(ans, arr[i]);
-        for (int i=1; i<=n; i++) {
-            int cnt = arr[i];
-            for (int j=i+1; j<=Math.min(n, i+256); j++) {
-                cnt ^= arr[j];
-                ans = Math.max(ans, cnt);
-            }
-        }
-        out.println(ans);
-        out.flush();
+        int n  = fs.nextInt();
+          int a[] = fs.setArray(n);
+          int ans = maxXOR(a,n);
+          out.println(ans);
+          out.flush();
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); }  // Make t = 1 baby
