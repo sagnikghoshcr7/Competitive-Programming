@@ -33,49 +33,54 @@ public class C_Rudolf_and_the_Another_Competition {
     static long [] larr = new long[100001];
     static int cnt = 0, tmpSum = 0;
 
-    private static class Pair<P1, P2> {
-        P1 first;
-        P2 second;
-
-        Pair(P1 first, P2 second) {
+    private static class Pair {
+        int first;
+        int second;
+     
+        public Pair(int first, int second) {
             this.first = first;
             this.second = second;
         }
     }
+    
 
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
         int m = fs.nextInt();
         int h = fs.nextInt();
 
-        List<Pair<Integer, Integer>> list = new ArrayList<>();
+        int[][] arr = fs.set2dArray(n, m);
+        long[][] ans = new long[n][2];
+
+        if (n == 1) { System.out.println(1); return; }
+
+        for (int i = 0; i < n; i++) Arrays.sort(arr[i]);
 
         for (int i = 0; i < n; i++) {
-            String[] str = fs.nextLine().split(" ");
-            List<Integer> tlist = new ArrayList<>();
-
-            for (String t : str) {
-                tlist.add(Integer.parseInt(t));
+            long problems = 0, penalty = 0, psum = 0, time = 0;
+            for (int j = 0; j < m; j++) {
+                time += arr[i][j];
+                if (time > h)
+                    break;
+                problems++;
+                psum = psum + arr[i][j];
+                penalty = penalty + psum;
             }
-
-            Collections.sort(tlist);
-            int points = 0;
-            int wrong = 0;
-            int tSpnt = 0;
-
-            for (int t : tlist) {
-                if (tSpnt + t <= h) { points++; tSpnt += t; wrong += tSpnt; }
-                else break;
-            }
-            list.add(new Pair<>(points, wrong));
+            ans[i][0] = problems;
+            ans[i][1] = penalty;
         }
+        long p = ans[0][0], penalty = ans[0][1], cnt = 0;
 
-        int rudolfRank = 1;
-        for (Pair<Integer, Integer> participant : list) {
-            if (participant.first > list.get(0).first || (participant.first.equals(list.get(0).first) && participant.second < list.get(0).second)) rudolfRank++;
+        Arrays.sort(ans, (a, b) -> {
+            if (a[0] == b[0]) return Long.compare(a[1], b[1]);
+            return Long.compare(b[0], a[0]);
+        });
+
+        for (int i = 0; i < n; i++) {
+            if (ans[i][0] == p && ans[i][1] == penalty) break;
+            cnt++;
         }
-
-        out.println(rudolfRank);
+        out.println(cnt + 1);
         out.flush();
     }
 
