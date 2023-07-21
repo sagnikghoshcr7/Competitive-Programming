@@ -34,19 +34,21 @@ public class E_Cardboard_for_Pictures {
     static long [] larr = new long[100001];
     static int cnt = 0, tmpSum = 0;
 
-    private static void sagnik() throws IOException {
-        int n = fs.nextInt();
+    private static void sagnik() throws IOException {        
+        long n = fs.nextLong();
         long c = fs.nextLong();
-        int left = 0, right;
-        int total = 0;
+        long left=0, right;
+        long total = 0;
+
         for (int i = 0; i < n; i++) {
-            right = fs.nextInt();
+            right = fs.nextLong();
             left += right*right;
             total += right;
         }
 
-        c -= left; c /= 4; c /= n;
-        total /= 2*n;
+        c -= left; c = c / 4; c = c / n;
+        total /= 2 * n;
+
         long res = (long) Math.sqrt(total*total + c);
         res -= total;
         out.println(res);
