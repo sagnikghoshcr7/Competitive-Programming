@@ -37,16 +37,22 @@ public class D_Balanced_Round {
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
         long diff = fs.nextLong();
-        if (n==1) {out.println(0); return;}
         long[] a = fs.lsetArray(n);
         Arrays.sort(a);
 
-        int count = 0;
-        for (int i=0; i<n-1; i++) {
-            if (a[i+1] - a[i] > diff) continue;
-            else count++;
+        int i = 0;
+        long res = 0;
+        while (i < n) {
+            int j = i+1;
+            while (j < n) {
+                if (a[j]-a[j-1] > diff) break;
+                j++;
+            }
+            long dif = j - i;
+            res = Math.max(res, dif);
+            i = j;
         }
-        out.println(count);
+        out.println(n - res);
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
