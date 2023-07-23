@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class B_Fibonaccharsis {
+public class C_Ntarsis_Set {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -32,23 +32,68 @@ public class B_Fibonaccharsis {
     static final int[] dx9 = { -1, -1, -1, 0, 0, 0, 1, 1, 1 }, dy9 = { -1, 0, 1, -1, 0, 1, -1, 0, 1 };
     static final double eps = 1e-10;
     static long [] larr = new long[100001];
-    static int tmpSum = 0;
+    static int cnt = 0, tmpSum = 0;
 
-    private static int[] helperFib(int k) {
-        int num1 = 1, num2 = 0;
-        for (int i = 0; i < k - 1; i++) {
-            int num3 = num1 + num2; num1 = num2; num2 = num3;
+    static int[] arr;
+    static int n, k;
+
+    static boolean helper(int mid) {
+        for (int i = 0; i < k; i++) {
+            int l = uBound(arr, mid);
+            l--;
+            if (l < 0) {
+                if (arr[0] == 1) mid--;
+            } else {
+                l++;
+                mid -= (l - 1);
+            }
         }
-        return new int[]{num1, num2};
+        return mid > 0;
+    }
+
+    static int uBound(int[] arr, int val) {
+        int low = 0, high = arr.length - 1;
+        int res = -1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] <= val) {
+                res = mid;
+                low = mid + 1;
+            }
+            else high = mid - 1;
+        }
+
+        return res + 1;
+    }
+
+    static void bsearch() {
+        int lo = 1, hi = (int) 1e18;
+        int ans = hi;
+
+        while (lo <= hi) {
+            int mid = (int) ((lo + hi) / 2);
+            if (helper(mid)) {
+                hi = mid - 1;
+                ans = mid;
+            }
+            else lo = mid + 1;
+        }
+        out.println(ans);
     }
 
     private static void sagnik() throws IOException {
-        int n = fs.nextInt();
-        int k = fs.nextInt();        
-        out.println(getSeqs(n, k));
+        n = sc.nextInt();
+        k = sc.nextInt();
+        arr = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        Arrays.sort(arr);
+        bsearch();
     }
 
-    public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
+    public static void main(String[] args) throws IOException { int t = sc.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
 
     // dont worry bout me, i'm not high
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}

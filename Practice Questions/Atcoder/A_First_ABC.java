@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class B_Fibonaccharsis {
+public class A_First_ABC {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -32,23 +32,19 @@ public class B_Fibonaccharsis {
     static final int[] dx9 = { -1, -1, -1, 0, 0, 0, 1, 1, 1 }, dy9 = { -1, 0, 1, -1, 0, 1, -1, 0, 1 };
     static final double eps = 1e-10;
     static long [] larr = new long[100001];
-    static int tmpSum = 0;
-
-    private static int[] helperFib(int k) {
-        int num1 = 1, num2 = 0;
-        for (int i = 0; i < k - 1; i++) {
-            int num3 = num1 + num2; num1 = num2; num2 = num3;
-        }
-        return new int[]{num1, num2};
-    }
+    static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
-        int k = fs.nextInt();        
-        out.println(getSeqs(n, k));
+        String s = fs.next();
+        HashSet<Character> set = new HashSet<Character>();
+        for (int i=0; i<n; i++) {
+            set.add(s.charAt(i));
+            if (set.size() == 3) {out.print(i+1); break;}
+        }
     }
 
-    public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
+    public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
 
     // dont worry bout me, i'm not high
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
