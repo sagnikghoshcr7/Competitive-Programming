@@ -34,66 +34,35 @@ public class C_Ntarsis_Set {
     static long [] larr = new long[100001];
     static int cnt = 0, tmpSum = 0;
 
-    static int[] arr;
-    static int n, k;
-
-    static boolean helper(int mid) {
-        for (int i = 0; i < k; i++) {
-            int l = uBound(arr, mid);
-            l--;
-            if (l < 0) {
-                if (arr[0] == 1) mid--;
-            } else {
-                l++;
-                mid -= (l - 1);
-            }
-        }
-        return mid > 0;
-    }
-
-    static int uBound(int[] arr, int val) {
-        int low = 0, high = arr.length - 1;
-        int res = -1;
-
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (arr[mid] <= val) {
-                res = mid;
-                low = mid + 1;
-            }
-            else high = mid - 1;
-        }
-
-        return res + 1;
-    }
-
-    static void bsearch() {
-        int lo = 1, hi = (int) 1e18;
-        int ans = hi;
-
-        while (lo <= hi) {
-            int mid = (int) ((lo + hi) / 2);
-            if (helper(mid)) {
-                hi = mid - 1;
-                ans = mid;
-            }
-            else lo = mid + 1;
-        }
-        out.println(ans);
-    }
-
     private static void sagnik() throws IOException {
-        n = sc.nextInt();
-        k = sc.nextInt();
-        arr = new int[n + 1];
-        for (int i = 1; i <= n; i++) {
-            arr[i] = sc.nextInt();
+        int n = fs.nextInt();
+        int k = fs.nextInt();
+        long[] nums = new long[n + 2];
+        for (int i = 0; i < n; i++) {
+            nums[i + 1] = fs.nextLong();
         }
-        Arrays.sort(arr);
-        bsearch();
+        if (nums[1] != 1) {
+            out.println(1);
+            return;
+        }
+        nums[n + 1] = (long) 1e18;
+        long cnt = 1;
+        ArrayList<Long> ans = new ArrayList<>();
+        long d = 1;
+        for (int i = 2; i <= n + 1; i++) {
+            while (cnt + d < nums[i]) {
+                cnt += d;
+                ans.add(cnt);
+                if (ans.size() > k) {
+                    out.println(ans.get((int) k - 1));
+                    return;
+                }
+            }
+            d = i;
+        }
     }
 
-    public static void main(String[] args) throws IOException { int t = sc.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
+    public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
 
     // dont worry bout me, i'm not high
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
