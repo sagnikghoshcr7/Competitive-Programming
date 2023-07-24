@@ -34,18 +34,26 @@ public class B_Fibonaccharsis {
     static long [] larr = new long[100001];
     static int tmpSum = 0;
 
-    private static int[] helperFib(int k) {
-        int num1 = 1, num2 = 0;
-        for (int i = 0; i < k - 1; i++) {
-            int num3 = num1 + num2; num1 = num2; num2 = num3;
+    static int count=0;
+    static void fib(int k, int prev ,int last){
+        if (k == 2){
+            count++;
+            return;
         }
-        return new int[]{num1, num2};
+        int curr = last - prev;
+        if(curr > prev) return;
+        fib(k-1,curr,prev);
     }
 
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
-        int k = fs.nextInt();        
-        out.println(getSeqs(n, k));
+        int k = fs.nextInt();
+
+        count=0;
+        for(int i=(n+1)/2; i<=n; i++){
+            fib(k,i,n);
+        }
+        out.println(count);
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
