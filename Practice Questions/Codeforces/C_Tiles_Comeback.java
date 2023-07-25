@@ -36,7 +36,7 @@ public class C_Tiles_Comeback {
 
     private static void sagnik() throws IOException {
         int t = fs.nextInt();
-        loop: while (t-- > 0) {
+        testCaseLoop: while (t-- > 0) {
             int n = fs.nextInt();
             int k = fs.nextInt();
             int[] a = fs.setArray(n);
@@ -47,9 +47,9 @@ public class C_Tiles_Comeback {
                 if (count == k) {l = i; break;}
             }
 
-            if (count < k) {out.println("NO"); continue loop;}
+            if (count < k) {out.println("NO"); continue testCaseLoop;}
             else {
-                if (a[0] == a[n - 1]) {out.println("YES"); continue loop;}
+                if (a[0] == a[n - 1]) {out.println("YES"); continue testCaseLoop;}
             }
 
             count = 0;
