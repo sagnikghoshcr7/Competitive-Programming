@@ -35,8 +35,14 @@ public class A_Escalator_Conversations {
     static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        int n = fs.nextInt();
-        
+        int n = fs.nextInt(), m = fs.nextInt(), k = fs.nextInt(), H = fs.nextInt();
+        int[] h = fs.setArray(n);
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            int diff = Math.abs(H - h[i]);
+            if (diff != 0 && diff % k == 0 && diff <= m*k-k) count++;
+        }
+        out.println(count);
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
