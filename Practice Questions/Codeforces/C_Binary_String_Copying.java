@@ -35,22 +35,37 @@ public class C_Binary_String_Copying {
     static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        fs.nextInt(); int m = fs.nextInt();
+        int n = fs.nextInt();
+        int m = fs.nextInt();
         String s = fs.next();
-        List<List<Integer>> list = new ArrayList<>();
-        for (int i = 0; i < m; ++i) list.add(Arrays.asList(fs.nextInt(), fs.nextInt()));
-        
-        Map<String, Integer> map = new HashMap<>();
-        Set<String> set = new HashSet<>();        
-        for (int i=0; i<m; i++) {
-            String str = s;
-            char[] a = str.toCharArray();
-            int x = list.get(i).get(0) - 1, y = list.get(i).get(1) - 1;
-            Arrays.sort(a, x, y + 1);
-            str = new String(a);            
-            if (!set.contains(str)) {set.add(str);map.put(str, 1);}
-        }        
-        out.println(map.size());        
+        int[] zero = new int[n], one = new int[n];
+        int i = n - 1;
+        while (i >= 0) {
+            if (s.charAt(i) == '0') {
+                int count = 0;
+                while (i >= 0 && s.charAt(i) == '0') {count++;zero[i] = count;i--;}
+            }
+            else i--;
+        }
+        i = 0;
+        while (i < n) {
+            if (s.charAt(i) == '1') {
+                int count = 0;
+                while (i < n && s.charAt(i) == '1') {count++;one[i] = count;i++;}
+            }
+            else i++;
+        }
+
+        Set<List<Integer>> set = new HashSet<>();
+        int count = 0;
+        for (i = 0; i < m; i++) {
+            int a = fs.nextInt() - 1, b = fs.nextInt() - 1;
+            a += zero[a]; b -= one[b];
+            if (a > b) count = 1;
+            else set.add(Arrays.asList(a, b));
+        }
+
+        out.println(set.size() + count);
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
