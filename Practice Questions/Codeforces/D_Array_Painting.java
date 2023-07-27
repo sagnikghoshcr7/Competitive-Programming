@@ -37,25 +37,45 @@ public class D_Array_Painting {
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
         int[] a = fs.setArray(n);
-        int cnt = 0;
-        for (int i = 0; i < n; ++i) {
-            if (a[i] == 1) {
-                if (i > 0 && a[i - 1] == 0) {
-                    a[i] = 0;
-                    cnt++;
-                } else if (a[i] == 2) {
-                    if (i > 0 && (a[i - 1] == 0 || a[i - 1] == 1)) {
-                        a[i] = 1;
-                        cnt++;
-                    } else if (i < n - 1 && (a[i + 1] == 0 || a[i + 1] == 1)) {
-                        a[i] = 1;
-                        cnt++;
+        Queue<Integer> q = new LinkedList<>();
+        boolean[] visited = new boolean[n];
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (visited[i] || a[i] != 2) continue;
+            q.add(i);
+            ans++;
+            while (!q.isEmpty()) {
+                int p = q.poll();
+                if (visited[p]) continue;
+                visited[p] = true;
+                if (a[p] == 0) continue;
+                if (p + 1 < n) q.add(p + 1);
+                if (p - 1 >= 0) q.add(p - 1);
+            }
+        }
+        int zeros = 0;
+        int intervals = 0;
+        boolean start = false;
+        for (int i = 0; i < n; i++) {
+            if (visited[i]) {
+                ans += Math.max(zeros, intervals);
+                zeros = 0;
+                intervals = 0;
+                start = false;
+            } else {
+                if (a[i] == 0) {
+                    zeros++;
+                    start = false;
+                } else if (a[i] == 1) {
+                    if (!start) {
+                        intervals++;
+                        start = true;
                     }
                 }
             }
         }
-        
-        System.out.println(cnt);
+        ans += Math.max(zeros, intervals);
+        out.println(ans);
     }
 
     public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
