@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class A_Dalton_the_Teacher {
+public class C_2_Dual_Hard_Version {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -36,10 +36,7 @@ public class A_Dalton_the_Teacher {
 
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
-        int[] a = fs.setArray(n);
-        int count=0;
-        for (int i=0; i<n; i++) if (i+1 == a[i]) count++;
-        out.println((count+1)/2);
+        int[] s = fs.setArray(n);
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby

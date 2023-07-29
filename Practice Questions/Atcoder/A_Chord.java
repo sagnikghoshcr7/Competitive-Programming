@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class A_Dalton_the_Teacher {
+public class A_Chord {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -34,15 +34,16 @@ public class A_Dalton_the_Teacher {
     static long [] larr = new long[100001];
     static int cnt = 0, tmpSum = 0;
 
-    private static void sagnik() throws IOException {
-        int n = fs.nextInt();
-        int[] a = fs.setArray(n);
-        int count=0;
-        for (int i=0; i<n; i++) if (i+1 == a[i]) count++;
-        out.println((count+1)/2);
+    private static boolean check(String s) {
+        return (s.equals("ACE") || s.equals("BDF") || s.equals("CEG") || s.equals("DFA") || s.equals("EGB") || s.equals("FAC") || s.equals("GBD"));
     }
 
-    public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
+    private static void sagnik() throws IOException {
+        String s = fs.next();
+        prtYesNo(check(s));
+    }
+
+    public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
 
     // dont worry bout me, i'm not high
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
