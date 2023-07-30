@@ -36,7 +36,144 @@ public class C_2_Dual_Hard_Version {
 
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
-        int[] s = fs.setArray(n);
+        int[] arr = fs.setArray(n);
+        int[] arr2 = Arrays.copyOf(arr, n);
+        Arrays.sort(arr2);
+
+        int min = arr2[0];
+        int max = arr2[n-1];
+        int neg = 0;
+        int pos = 0;
+
+        for(int i=0; i<n; i++) {
+            if(arr[i]<0) neg++;
+            else if(arr[i]>0) pos++;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        int counter = 0;
+
+        int cmpneg = (int) (neg + Math.log(Math.abs(min))/Math.log(2));
+        int cmppos = (int) (pos + Math.log(Math.abs(max))/Math.log(2));
+
+        if(min >= 0 || max <= 0) {
+            if(min >= 0) {
+                for(int i=0; i<n-1; i++) {
+                    int first = arr[i];
+                    int second = arr[i+1];
+                    if(second < first) {
+                        arr[i+1] += arr[i];
+                        counter++;
+                        sb.append(i+2).append(" ").append(i+1).append("\n");
+                    }
+                }
+            } else {
+                for(int i=n-1; i>0; i--) {
+                    int first = arr[i];
+                    int second = arr[i-1];
+                    if(second > first) {
+                        arr[i-1] += arr[i];
+                        counter++;
+                        sb.append(i).append(" ").append(i+1).append("\n");
+                    }
+                }
+            }
+        } else if(cmpneg < cmppos) {
+            int ptr = 0;
+            while(arr[ptr]!=max) ptr++;
+            while(arr[ptr]<Math.abs(min)) {
+                counter++;
+                arr[ptr]*=2;
+                sb.append(ptr+1).append(" ").append(ptr+1).append("\n");
+            }
+
+            for(int i=0; i<n; i++) {
+                if(arr[i]<0) {
+                    int p = 0;
+                    int ref = Integer.MAX_VALUE;
+
+                    for(int u=0; u<n; u++) {
+                        if(arr[u] >= -arr[i] && arr[u]<ref) {
+                            ref = arr[u];
+                            p = u;
+                        }
+                    }
+
+                    arr[i] += arr[p];
+                    counter++;
+                    sb.append(i+1).append(" ").append(p+1).append("\n");
+                }
+            }
+
+            for(int i=0; i<n-1; i++) {
+                int first = arr[i];
+                int second = arr[i+1];
+                if(second < first) {
+                    int dif = first-second;
+                    int p = 0;
+                    int ref = Integer.MAX_VALUE;
+
+                    for(int u=0; u<n; u++) {
+                        if(arr[u]>=dif && arr[u]<ref) {
+                            ref = arr[u];
+                            p = u;
+                        }
+                    }
+                    arr[i+1] += arr[p];
+                    counter++;
+                    sb.append(i+2).append(" ").append(p+1).append("\n");
+                }
+            }
+
+        } else {
+            int ptr = 0;
+            while(arr[ptr]!=min) ptr++;
+            while(Math.abs(arr[ptr])<max) {
+                counter++;
+                arr[ptr] += arr[ptr];
+                sb.append(ptr+1).append(" ").append(ptr+1).append("\n");
+            }
+            for(int i=0; i<n; i++) {
+                if(arr[i]>0) {
+                    int p = 0;
+                    int ref = Integer.MIN_VALUE;
+
+                    for(int u=0; u<n; u++) {
+                        if(arr[u]<=-arr[i] && arr[u]>ref) {
+                            ref = arr[u];
+                            p = u;
+                        }
+                    }
+
+                    arr[i] += arr[p];
+                    counter++;
+                    sb.append(i+1).append(" ").append(p+1).append("\n");
+                }
+            }
+
+            for(int i=n-1; i>0; i--) {
+                int first = arr[i];
+                int second = arr[i-1];
+                if(second > first) {
+                    int dif = first-second;
+                    int p = 0;
+                    int ref = Integer.MIN_VALUE;
+
+                    for(int u=0; u<n; u++) {
+                        if(arr[u]<=dif && arr[u]>ref) {
+                            ref = arr[u];
+                            p = u;
+                        }
+                    }
+
+                    arr[i-1] += arr[p];
+                    counter++;
+                    sb.append(i).append(" ").append(p+1).append("\n");
+                }
+            }
+        }
+        out.println(counter);
+        out.println(sb);        
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
