@@ -36,25 +36,20 @@ public class C_Contrast_Value {
 
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
-        ArrayList<Integer> a = new ArrayList<Integer>();
-        for (int i=0; i<n; i++) a.add(fs.nextInt());
-        remove_consecutive_equal(a);
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for (int i=0; i<n; i++) list.add(fs.nextInt());
 
-        int ans = a.size();
-        for (int i = 0; i + 2 < a.size(); ++i) {
-            if (a.get(i) < a.get(i + 1) && a.get(i + 1) < a.get(i + 2)) ans--;
-            if (a.get(i) > a.get(i + 1) && a.get(i + 1) > a.get(i + 2)) ans--;
+        int count = 0, dec = 0; // dec for decreasing
+        for (int i = 0; i < n - 1; i++) {
+            if (list.get(i) > list.get(i + 1)) {
+                if (dec != 1) count++;
+                dec = 1;
+            } else if (list.get(i) < list.get(i + 1)) {
+                if (dec != -1) count++;
+                dec = -1;
+            }
         }
-
-        out.println(ans);
-    }
-
-    private static void remove_consecutive_equal(ArrayList<Integer> list) {
-        int index = 1;
-        while (index < list.size()) {
-            if (list.get(index).equals(list.get(index - 1))) list.remove(index);
-            else index++;
-        }
+        out.println(count + 1);
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
