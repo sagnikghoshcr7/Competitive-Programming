@@ -36,3 +36,6 @@
 
 ## Other Resources
 - [OEIS](https://oeis.org/) A website which tells you about the upcoming Integer Sequence. It's just amazing. Give It a Try.
+
+## Expected TC as per Input
+<img align="left" src="https://github.com/sagnikghoshcr7/images/blob/master/CP%20TC.png" height="350px">
