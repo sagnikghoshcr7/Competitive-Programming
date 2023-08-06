@@ -13,6 +13,9 @@
 <br />
 <br />
 
+## My Solutions
+[Click Here](./Practice%20Questions) baby
+
 ## Practice Websites
 - [Atcoder](https://atcoder.jp/)
   - [Kenkoooo Grid Ladder](https://kenkoooo.com/atcoder/#/table/)
