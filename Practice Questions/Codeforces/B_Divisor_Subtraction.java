@@ -36,10 +36,19 @@ public class B_Divisor_Subtraction {
 
     private static void sagnik() throws IOException {
         long n = fs.nextLong();
-        /*
-         ! solve this
-         */
-        
+        long cnt = 0;
+        if ((n&1) == 1){
+            n -= get(n);
+            cnt++;
+        }
+        out.print(cnt + n / 2);
+    }
+
+    private static long get(long n){
+        for (long i = 2; i * i <= n; i++) {
+            if (n % i == 0) return i;
+        }
+        return n;
     }
 
     public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
