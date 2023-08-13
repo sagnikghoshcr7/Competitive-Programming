@@ -36,31 +36,24 @@ public class B_Olya_and_Game_with_Arrays {
 
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
-        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
-        int min = Integer.MAX_VALUE, minInd = -1;
-
-        for (int i=0; i<n; i++) {
-            list.add(new ArrayList<Integer>());
-            int size = fs.nextInt();
-            for (int j=0; j<size; j++) {
-                int val = fs.nextInt();
-                list.get(i).add(val);
-                if (min > val) {
-                    min = val; minInd = i;
-                }
-            }
-        }
-        // debug(min + "    " + minInd);
-
-        for (int i=0; i<n; i++) Collections.sort(list.get(i));
-
         long sum = 0;
-        for (int i=0; i<n; i++) {
-            if (i == minInd) sum += list.get(i).get(0);
-            else sum += list.get(i).get(1);
+        int smallestsecond = Integer.MAX_VALUE;
+        int smallestfirst = Integer.MAX_VALUE;
+        for(int i=0; i<n; i++) {
+            int m = fs.nextInt();
+            int arr[] = new int[m];
+            for(int u=0; u<m; u++) {
+                arr[u] = fs.nextInt();
+            }
+
+            Arrays.sort(arr);
+            sum += arr[1];
+            smallestfirst = Integer.min(arr[0],smallestfirst);
+            smallestsecond = Integer.min(arr[1],smallestsecond);
+
         }
 
-        out.println(sum);
+        out.println(sum - (smallestsecond-smallestfirst));
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
