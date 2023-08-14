@@ -35,10 +35,10 @@ public class B_Update_Files {
     static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        int n = fs.nextInt(), k = fs.nextInt();
+        long n = fs.nextInt(), k = fs.nextInt();
         if (n == 1) {out.println(0); return;}
 
-        int ans = 0, cur = 1;
+        long ans = 0, cur = 1;
 
         while (cur < k) {
             cur *= 2;
