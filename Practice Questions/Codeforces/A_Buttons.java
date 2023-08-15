@@ -36,9 +36,14 @@ public class A_Buttons {
 
     private static void sagnik() throws IOException {
         int a = fs.nextInt(), b = fs.nextInt(), c = fs.nextInt();
-        a += (c/2 + c%2);
-        b += (c/2);
-        prtYesNo(a>b);
+
+        if (a == b) { prtFirstSecond(c % 2 == 1); return; }
+        prtFirstSecond(a > b);
+
+
+        // a += (c/2 + c%2);
+        // b += (c/2);
+        // prtFirstSecond(a>b);
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
@@ -79,7 +84,7 @@ public class A_Buttons {
 
     private static void prtList(List<Integer> x) {for(int i : x) {System.out.print(i+" ");}}
     private static void prtArr(int[] A) {for(int i=0;i<A.length;i++)System.out.print(A[i]+" ");}
-    private static void prtYesNo(boolean c) {System.out.println(c ? "First" : "Second");} // {System.out.println(c ? "YES" : "NO");}
+    private static void prtFirstSecond(boolean c) {System.out.println(c ? "First" : "Second");} // {System.out.println(c ? "YES" : "NO");}
 
     private static void debug(Object... o) {if(o.length != 0) System.err.println(Arrays.deepToString(o)); else System.err.println();}
 
