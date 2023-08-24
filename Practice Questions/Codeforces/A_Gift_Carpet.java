@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class P_1_Triple_Triplets {
+public class A_Gift_Carpet {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -34,34 +34,30 @@ public class P_1_Triple_Triplets {
     static long [] larr = new long[100001];
     static int cnt = 0, tmpSum = 0;
 
-    /*
-     ! Unsolved
-     ! Unsolved
-     ! Unsolved
-     ! Unsolved
-     ! Unsolved
-     */
-
     private static void sagnik() throws IOException {
-        int n = fs.nextInt();
-        if (n == 1 || n == 2 || n == 3) out.print(0);
-        out.print(fact(n-2)/(fact(2) * fact(n-2-2)));
-    }
-    
-    private static int fact(int n) {
-        int fact=1;
-        for(int i=1;i<=n;i++){    
-            fact=fact*i;    
+        int n = fs.nextInt(), m = fs.nextInt();
+        char[][] a = fs.set2sCharArray(n, m);
+
+        int it = 0;
+        String s = "vika";
+
+        for (int i=0; i<m; i++) {
+            for (int j=0; j<n; j++) {
+                if (it == 4) break;
+                if (a[j][i] == s.charAt(it)) {
+                    it++; break;
+                }
+            }
         }
-        return fact; 
+        prtYesNo(it==4);
     }
 
-    public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
+    public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
 
     // dont worry bout me, i'm not high
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
     private static int arrMin(int[] A) {return Arrays.stream(A).min().getAsInt();}
-    private static int arrSum(int[] A) {return Arrays.stream(A).sum();}
+    private static long arrSum(int[] A) {long sum = 0; for(int i=0; i<A.length; i++) sum += A[i]; return sum;}
     private static int countNumInArr(int[] A, int n) {return (int) Arrays.stream(A).filter(x -> x == n).count();}
     private static void swap(int[] A, int i, int j) { int temp = A[i]; A[i] = A[j]; A[j] = temp; }
     private static void reverse(int[] A) {int s=0,e=A.length-1;while(s<e){swap(A,s,e);s++;e--;}}
@@ -80,6 +76,8 @@ public class P_1_Triple_Triplets {
 
     private static int gcd(int a, int b) {if (b == 0) return a; return gcd(b, a % b);}
     private static int lcm(int a, int b) {return (a*b)/gcd(a, b);}
+    private static long pow(long b, long p, long m) {long res = 1; while (p > 0) {if ((p & 1) == 1) res = (res * b) % m; b = (b * b) % m; p = p >> 1;} return res;}
+    private static long sqrt(long x) {long l = 0, h = (long) (3e9), ans = 0; while (l <= h) {long mid = l + (h - l) / 2; if (mid * mid <= x) {ans = mid; l = mid + 1;} else h = mid - 1;} return ans;}
     private static int[] listToArr(List<Integer> x) {return x.stream().mapToInt(i -> i).toArray();}
     private static String[] dynamicListToArr(List<String> x) {return x.toArray(new String[x.size()]);}
 
@@ -92,7 +90,7 @@ public class P_1_Triple_Triplets {
 
     private static void prtList(List<Integer> x) {for(int i : x) {System.out.print(i+" ");}}
     private static void prtArr(int[] A) {for(int i=0;i<A.length;i++)System.out.print(A[i]+" ");}
-    private static void prtYesNo(boolean c) {System.out.println(c ? "Yes" : "No");} // {System.out.println(c ? "YES" : "NO");}
+    private static void prtYesNo(boolean c) {System.out.println(c ? "YES" : "NO");}
 
     private static void debug(Object... o) {if(o.length != 0) System.err.println(Arrays.deepToString(o)); else System.err.println();}
 
