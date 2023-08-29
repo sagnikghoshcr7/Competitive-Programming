@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class Dice_Combinations {
+public class Coin_Combinations_II {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -35,18 +35,20 @@ public class Dice_Combinations {
     static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        int n = fs.nextInt();
+        int n = fs.nextInt(), x = fs.nextInt();
+        int[] a = fs.setArray(n);
 
-        int[] dp = new int[n+1];
+        int[] dp = new int[x+1];
         dp[0] = 1;
 
-        for (int i=1; i<=n; i++) {
-            for (int x=1; x<=6; x++) {
-                if (x>i) continue; // if (n = 3) then we'll calculate only for x -> [1, 3]
-                dp[i] = (dp[i] + dp[i-x]) % mod; // or (dp[i] += dp[i-x]) %= mod;
+        for (int i=0; i<n; i++) { // loop for all diff types of conins
+            for (int j=1; j<=x; j++) {
+                if (j<a[i]) continue; // or we can start this loop from j=arr[i]
+                dp[j] = (dp[j] + dp[j-a[i]]) % mod; // basically, dp[j] += dp[j-a[i]]; or (dp[i] += dp[i-c[j]]) %= mod;
             }
         }
-        out.print(dp[n]);
+        
+        out.print(dp[x]);
     }
 
     public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
