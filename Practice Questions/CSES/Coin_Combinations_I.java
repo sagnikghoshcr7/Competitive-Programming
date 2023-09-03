@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class Coin_Combinations_II {
+public class Coin_Combinations_I {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -41,14 +41,24 @@ public class Coin_Combinations_II {
         int[] dp = new int[tar+1];
         dp[0] = 1;
 
-        for (int i=0; i<n; i++) { // loop for all diff types of conins
-            for (int j=1; j<=tar; j++) {
-                if (j<coins[i]) continue; // or we can start this loop from j=arr[i]
-                dp[j] = (dp[j] + dp[j-coins[i]]) % mod; // basically, dp[j] += dp[j-a[i]]; or (dp[i] += dp[i-c[j]]) %= mod;
+        for (int amt=1; amt<=tar; amt++) { // amt -> amount
+            for (int i=0; i<n; i++) { // iterate over every coins
+                if (amt < coins[i]) continue;
+                dp[amt] = (dp[amt] + dp[amt - coins[i]]) % mod; // basically, dp[amt] += dp[amt - coins[i]];
             }
         }
-        
+
         out.print(dp[tar]);
+
+        /*
+        Alternative for loop
+        for (int amt=1; amt<=tar; amt++) { // amt -> amount
+            for (int coin: coins) { // iterate over every coins
+                if (amt < coin) continue;
+                dp[amt] = (dp[amt] + dp[amt - coin]) % mod; // basically, dp[amt] += dp[amt - coins[i]];
+            }
+        }
+        */
     }
 
     public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
@@ -71,7 +81,7 @@ public class Coin_Combinations_II {
     private static boolean isRevSorted (int[] a, int s, int e) { for(int i=s; i<e-1; i++) if(a[i]<a[i+1]) return false; return true; }
     private static boolean isPrime(int x) {if(x==1) return false; for(int i=2; i*i<=x; i++){if(x%i==0) return false;} return true;}
     private static boolean[] genSieve(int n) {boolean[] A = new boolean[n+1]; Arrays.fill(A, true); A[0]=A[1]=false; for(int p=2; p<=n; p++) if(A[p] && (long)p*p<=n) for (int i=p*p; i<=n; i+=p) A[i]=false; return A;}
-    private static int[] genPrefixArr(int[] a) {int n = a.length; int[] pf = new int[n]; pf[0] = a[0]; for (int i=1; i<n; i++) pf[i] = pf[i-1] + a[i]; return pf; }
+    private static long[] genPrefixArr(int[] a) {int n = a.length; long[] pf = new long[n]; pf[0] = a[0]; for (int i=1; i<n; i++) pf[i] = pf[i-1] + a[i]; return pf; }
 
     private static int gcd(int a, int b) {if (b == 0) return a; return gcd(b, a % b);}
     private static int lcm(int a, int b) {return (a*b)/gcd(a, b);}
@@ -84,8 +94,8 @@ public class Coin_Combinations_II {
     private static long[] lsetArray(int n) {long A[]=new long[n]; for(int i=0;i<n;i++) A[i]=sc.nextLong(); return A;}
     private static int[][] set2dArray(int n, int m) {int[][] a = new int[n][m]; for (int i=0; i<n; i++) for (int j=0; j<m; j++) a[i][j] = sc.nextInt(); return a;}
     private static long[][] lset2dArray(int n, int m) {long[][] a = new long[n][m]; for (int i=0; i<n; i++) for (int j=0; j<m; j++) a[i][j] = sc.nextLong(); return a;}
-    // private static char[][] set2sCharArray(int n, int m) {char[][] a = new char[n][m]; for (int i=0; i<n; i++) {String s = sc.next(); for (int j=0; j<m; j++) a[i][j] = s.charAt(j);} return a;}
-    private static char[][] set2sCharArray(int n, int m) {char[][] a = new char[n][m]; for(int i=0; i<n; i++) {char[] c = sc.next().toCharArray(); a[i] = c;} return a;}
+    // private static char[][] set2dCharArray(int n, int m) {char[][] a = new char[n][m]; for (int i=0; i<n; i++) {String s = sc.next(); for (int j=0; j<m; j++) a[i][j] = s.charAt(j);} return a;}
+    private static char[][] set2dCharArray(int n, int m) {char[][] a = new char[n][m]; for(int i=0; i<n; i++) {char[] c = sc.next().toCharArray(); a[i] = c;} return a;}
 
     private static void prtList(List<Integer> x) {for(int i : x) {System.out.print(i+" ");}}
     private static void prtArr(int[] A) {for(int i=0;i<A.length;i++)System.out.print(A[i]+" ");}
@@ -108,8 +118,8 @@ public class Coin_Combinations_II {
         private static long[] lsetArray(int n) throws IOException {long a[] = new long[n]; for(int i=0; i<n; i++) a[i] = nextLong(); return a;}
         private static int[][] set2dArray(int n, int m) throws IOException {int[][] a = new int[n][m]; for (int i=0; i<n; i++) for (int j=0; j<m; j++) a[i][j] = fs.nextInt(); return a;}
         private static long[][] lset2dArray(int n, int m) throws IOException {long[][] a = new long[n][m]; for (int i=0; i<n; i++) for (int j=0; j<m; j++) a[i][j] = fs.nextLong(); return a;}
-        // private static char[][] set2sCharArray(int n, int m) throws IOException {char[][] a = new char[n][m]; for (int i=0; i<n; i++) {String s = fs.next(); for (int j=0; j<m; j++) a[i][j] = s.charAt(j);} return a;}
-        private static char[][] set2sCharArray(int n, int m) throws IOException {char[][] a = new char[n][m]; for(int i=0; i<n; i++) {char[] c = fs.next().toCharArray(); a[i] = c;} return a;}
+        // private static char[][] set2dCharArray(int n, int m) throws IOException {char[][] a = new char[n][m]; for (int i=0; i<n; i++) {String s = fs.next(); for (int j=0; j<m; j++) a[i][j] = s.charAt(j);} return a;}
+        private static char[][] set2dCharArray(int n, int m) throws IOException {char[][] a = new char[n][m]; for(int i=0; i<n; i++) {char[] c = fs.next().toCharArray(); a[i] = c;} return a;}
 
         private static int nextInt() throws IOException {return Integer.parseInt(next());}
         private static Long nextLong() throws IOException {return Long.parseLong(next());}
