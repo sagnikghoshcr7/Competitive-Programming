@@ -36,7 +36,7 @@ public class Mixing_Extraordinaire {
 
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
-        int[] a = fs.setArray(n);
+        long[] a = fs.lsetArray(n);
 
         long res = 0;
         for (int i=0; i<n; i++) {
