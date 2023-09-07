@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class Book_Shop {
+public class B_Getting_Zero {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -35,39 +35,27 @@ public class Book_Shop {
     static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        int n = fs.nextInt(), x = fs.nextInt();
-        int[] price = fs.setArray(n);
-        int[] pages = fs.setArray(n);
+        int n = fs.nextInt();
+        if(n == 0) { out.print(0 + " "); return; }
+        
+        int min = Integer.MAX_VALUE;
+        
+        for(int i=0; i<=15; i++){
+            int temp = n + i;
 
-        int[][] dp = new int[n+1][x+1];
-
-        /*
-        This will give edge TLE cause time limit on CSES is very tight
-
-        for (int i=1; i<=n; i++) {
-            for (int j=0; j<=x; j++) {
-                dp[i][j] = dp[i-1][j];
-                int left = j-price[i-1];
-                if (left >= 0) {
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i-1][left] + pages[i-1]);
-                }
+            int twos = 0;
+            while (temp%2 == 0) {
+                twos++;
+                temp /= 2;
             }
+
+            min = Math.min(min, i+15-twos);
         }
-        */
 
-        for(int i=1; i<=n; i++) {
-			for(int j=1; j<=x; j++) {
-				if(j - price[i-1] >= 0){
-					dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-price[i-1]] + pages[i-1]);
-				}
-				else dp[i][j] = dp[i-1][j];
-			}
-		}
-
-        out.print(dp[n][x]);
+        out.print(min + " ");
     }
 
-    public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
+    public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
 
     // dont worry bout me, i'm not high
     private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
