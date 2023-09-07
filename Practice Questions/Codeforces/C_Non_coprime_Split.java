@@ -34,17 +34,44 @@ public class C_Non_coprime_Split {
     static long [] larr = new long[100001];
     static int cnt = 0, tmpSum = 0;
 
-    private static void sagnik() throws IOException {
-        int a = fs.nextInt(), b = fs.nextInt();
+    static int[] prime = genSieve(10000001);
 
-        if (b-a<2) { out.println(-1); return; }
-        if (b%2 == 0) {
-            out.println((b/2) + " " + ((b/2)-2));
+    private static int[] genSieve(int n) {
+        int[] prime = new int[n + 1];
+        for (int i = 1; i <= n; i++)
+            prime[i] = i;
+        for (int i = 2; i * i <= n; i++) {
+            if (prime[i] == i)
+                for (int j = i * i; j <= n; j += i)
+                    prime[j] = i;
         }
-        else {
-            if (b-a)
+        return prime;
+    }
+
+    private static void sagnik() throws IOException {
+        int l = fs.nextInt(), r = fs.nextInt();
+
+        if (l == r) {
+            if (r % 2 == 0) {
+                int x = 2, y = r - 2;
+                if (y + x <= r && y + x >= l && y != 0) out.println(y + " " + x);
+                else out.println(-1);
+            } else {
+                int x = prime[r];
+                if (x == -1) out.println(-1);
+                else {
+                    int y = r - x;
+                    if (y + x <= r && y + x >= l && y != 0) out.println(y + " " + x);
+                    else out.println(-1);
+                }
+            }
+        } else {
+            if ((r & 1) == 1) r--;
+
+            int x = 2, y = r - 2;
+            if (y + x <= r && y + x >= l && y != 0) out.println(y + " " + x);
+            else out.println(-1);
         }
-        
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
@@ -66,7 +93,7 @@ public class C_Non_coprime_Split {
     private static boolean isSorted (int[] a, int s, int e) { for(int i=s; i<e-1; i++) if(a[i]>a[i+1]) return false; return true; }
     private static boolean isRevSorted (int[] a, int s, int e) { for(int i=s; i<e-1; i++) if(a[i]<a[i+1]) return false; return true; }
     private static boolean isPrime(int x) {if(x==1) return false; for(int i=2; i*i<=x; i++){if(x%i==0) return false;} return true;}
-    private static boolean[] genSieve(int n) {boolean[] A = new boolean[n+1]; Arrays.fill(A, true); A[0]=A[1]=false; for(int p=2; p<=n; p++) if(A[p] && (long)p*p<=n) for (int i=p*p; i<=n; i+=p) A[i]=false; return A;}
+    
     private static long[] genPrefixArr(int[] a) {int n = a.length; long[] pf = new long[n]; pf[0] = a[0]; for (int i=1; i<n; i++) pf[i] = pf[i-1] + a[i]; return pf; }
 
     private static int gcd(int a, int b) {if (b == 0) return a; return gcd(b, a % b);}
