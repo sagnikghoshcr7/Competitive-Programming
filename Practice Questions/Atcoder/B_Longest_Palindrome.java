@@ -35,31 +35,23 @@ public class B_Longest_Palindrome {
     static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        out.print(longestPalindrome(fs.next()));
-        
-    }
-
-    private static int longestPalindrome(String s) {
+        String s = fs.next();
         int n = s.length();
 
-        char arr[] = new char[52];
-
-        for(int i=0; i<n; i++){
-            char ch = s.charAt(i);
-            if(ch>=65 && ch<=90) arr[ch-'A']++;
-            else arr[26+ch-'a']++;
+        int res = 1;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (check(i, j, s)) res = Math.max(res, j - i + 1);
+            }
         }
+        out.print(res);
+    }
 
-        int ans = 0;
-        boolean odd = false;
-
-        for(int i=0; i<52; i++){
-            ans = ans+ (arr[i]/2)*2;
-            if(arr[i]%2==1) odd = true;
+    private static boolean check(int i, int j, String str) {
+        for (int l = i, r = j; l < r; l++, r--) {
+            if (str.charAt(l) != str.charAt(r)) return false;
         }
-        
-        if(odd) ans++;
-        return ans;
+        return true;
     }
 
     public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
