@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class C_Can_I_Square {
+public class F_Greetings {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -34,11 +34,44 @@ public class C_Can_I_Square {
     static long [] larr = new long[100001];
     static int cnt = 0, tmpSum = 0;
 
+
+    /*
+     ! solve
+     ! solve
+     ! solve
+     ! solve
+     ! solve
+     ! solve
+     */
+    static class Pair {
+        long first, second;
+
+        public Pair(long first, long second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+
     private static void sagnik() throws IOException {
         int n = fs.nextInt();
-        long sum = 0;
-        for (int i=0; i<n; i++) sum += fs.nextInt();
-        prtYesNo(Math.sqrt(sum) == (int) (Math.sqrt(sum)));
+        TreeSet<Long> s = new TreeSet<>();
+        long ans = 0;
+
+        for (int i = 0; i < n; i++) {
+            long x = fs.nextLong();
+            long y = fs.nextLong();
+
+            Long lower = s.lower(y);
+            if (lower != null) {
+                ans += s.size() - s.headSet(lower).size();
+            } else {
+                ans += s.size();
+            }
+
+            s.add(y);
+        }
+
+        System.out.println(ans);
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
@@ -79,7 +112,7 @@ public class C_Can_I_Square {
 
     private static void prtList(List<Integer> x) {for(int i : x) {System.out.print(i+" ");}}
     private static void prtArr(int[] A) {for(int i=0;i<A.length;i++)System.out.print(A[i]+" ");}
-    private static void prtYesNo(boolean c) {System.out.println(c ? "YES" : "NO");}
+    private static void prtYesNo(boolean c) {System.out.println(c ? "Yes" : "No");} // {System.out.println(c ? "YES" : "NO");}
 
     private static void debug(Object... o) {if(o.length != 0) System.err.println(Arrays.deepToString(o)); else System.err.println();}
 
