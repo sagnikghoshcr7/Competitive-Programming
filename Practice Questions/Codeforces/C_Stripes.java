@@ -18,7 +18,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class A_Rating_Increase {
+public class C_Stripes {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -35,24 +35,12 @@ public class A_Rating_Increase {
     static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        String s = fs.next();
-        Boolean ok = false;
-        for (int i=1; i<s.length(); i++) {
-            String b = s.substring(0, i);
-            String c = s.substring(i);
-
-            if (b.charAt(0) == '0' || c.charAt(0) == '0') continue;
-            else {
-                int bb = Integer.parseInt(b);
-                int cc = Integer.parseInt(c);
-                if(cc > bb) {
-                    out.println(bb + " " + cc);
-                    ok = true;
-                    break;
-                }
-            }
+        boolean ok = false;
+        for(int i = 0; i < 8; i ++){
+            String s = fs.next();
+            if(s.equals("RRRRRRRR")) ok = true;
         }
-        if(!ok) out.println(-1);
+        out.println(ok ? "R" : "B");
     }
 
     public static void main(String[] args) throws IOException { int t = fs.nextInt(); while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
