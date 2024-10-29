@@ -1,11 +1,7 @@
 // JAI SHREE RAM
 
 import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.*;
-import java.lang.*;
 import java.math.BigInteger;
-import java.text.DecimalFormat;
 import java.io.*;
 
 public class Main {
@@ -25,68 +21,31 @@ public class Main {
     static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        int n = fs.nextInt();
-        int[] a = fs.setArray(n);
+        int n = fs.nextInt(), m = fs.nextInt(), k = fs.nextInt();
+        int[] ppl = fs.setArray(n);
+        int[] flat = fs.setArray(m);
 
-        HashSet<Integer> set = new HashSet<>();
+        Arrays.sort(ppl); Arrays.sort(flat);
 
-        int count = 0;
-        for (int i=0; i<n; i++) {
-            if (set.contains(a[i])) continue;
-            else {
-                set.add(a[i]);
-                count++;
+        int i=0, j=0, ans=0;
+        while (i < n && j < m) {
+            // Found a suitable apartment for the applicant
+            if (Math.abs(ppl[i] - flat[j]) <= k) {
+                i++; j++; ans++;
+            } else {
+                // If the desired apartment size of the applicant is too big,
+                // move the apartment pointer to the right to find a bigger one
+                if (ppl[i] - flat[j] > k) j++;
+                // If the desired apartment size is too small,
+                // skip that applicant and move to the next person
+                else i++;
             }
         }
 
-        out.print(count);
+        out.print(ans);
     }
 
     public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby
-
-    // dont worry bout me, i'm not high
-    private static int arrMax(int[] A) {return Arrays.stream(A).max().getAsInt();}
-    private static int arrMin(int[] A) {return Arrays.stream(A).min().getAsInt();}
-    private static long arrSum(int[] A) {long sum = 0; for(int i=0; i<A.length; i++) sum += A[i]; return sum;}
-    private static int countNumInArr(int[] A, int n) {return (int) Arrays.stream(A).filter(x -> x == n).count();}
-    private static void swap(int[] A, int i, int j) { int temp = A[i]; A[i] = A[j]; A[j] = temp; }
-    private static void reverse(int[] A) {int s=0,e=A.length-1;while(s<e){swap(A,s,e);s++;e--;}}
-    private static void reverse(int[] A, int s) {int e=A.length-1;while(s<e){swap(A,s,e);s++;e--;}}
-    private static void reverse(int[] A, int s, int e) {while(s<e){swap(A,s,e);s++;e--;}}
-
-    private static int countSetBits(int number){int count=0; while(number>0){++count; number &= number-1;} return count;}
-
-    private static boolean isEven(int i) { return (i & 1) == 0; }
-    private static boolean isVowel(char c) { return c=='a' || c=='A' || c=='e' || c=='E' || c=='i' || c=='I' || c=='o' || c=='O' || c=='u' || c=='U';}
-    private static boolean isSorted (int[] a, int s, int e) { for(int i=s; i<e-1; i++) if(a[i]>a[i+1]) return false; return true; }
-    private static boolean isRevSorted (int[] a, int s, int e) { for(int i=s; i<e-1; i++) if(a[i]<a[i+1]) return false; return true; }
-    private static boolean isPrime(int x) {if(x==1) return false; for(int i=2; i*i<=x; i++){if(x%i==0) return false;} return true;}
-    private static boolean[] genSieve(int n) {boolean[] A = new boolean[n+1]; Arrays.fill(A, true); A[0]=A[1]=false; for(int p=2; p<=n; p++) if(A[p] && (long)p*p<=n) for (int i=p*p; i<=n; i+=p) A[i]=false; return A;}
-    private static long[] genPrefixArr(int[] a) {int n = a.length; long[] pf = new long[n]; pf[0] = a[0]; for (int i=1; i<n; i++) pf[i] = pf[i-1] + a[i]; return pf; }
-
-    private static int gcd(int a, int b) {if (b == 0) return a; return gcd(b, a % b);}
-    private static int lcm(int a, int b) {return (a*b)/gcd(a, b);}
-    private static long pow(long b, long p, long m) {long res = 1; while (p > 0) {if ((p & 1) == 1) res = (res * b) % m; b = (b * b) % m; p = p >> 1;} return res;}
-    private static long sqrt(long x) {long l = 0, h = (long) (3e9), ans = 0; while (l <= h) {long mid = l + (h - l) / 2; if (mid * mid <= x) {ans = mid; l = mid + 1;} else h = mid - 1;} return ans;}
-    private static int[] listToArr(List<Integer> x) {return x.stream().mapToInt(i -> i).toArray();}
-    private static String[] dynamicListToArr(List<String> x) {return x.toArray(new String[x.size()]);}
-
-    private static int[] setArray(int n) {int A[]=new int[n]; for(int i=0;i<n;i++) A[i]=sc.nextInt(); return A;}
-    private static long[] lsetArray(int n) {long A[]=new long[n]; for(int i=0;i<n;i++) A[i]=sc.nextLong(); return A;}
-    private static int[][] set2dArray(int n, int m) {int[][] a = new int[n][m]; for (int i=0; i<n; i++) for (int j=0; j<m; j++) a[i][j] = sc.nextInt(); return a;}
-    private static long[][] lset2dArray(int n, int m) {long[][] a = new long[n][m]; for (int i=0; i<n; i++) for (int j=0; j<m; j++) a[i][j] = sc.nextLong(); return a;}
-    // private static char[][] set2dCharArray(int n, int m) {char[][] a = new char[n][m]; for (int i=0; i<n; i++) {String s = sc.next(); for (int j=0; j<m; j++) a[i][j] = s.charAt(j);} return a;}
-    private static char[][] set2dCharArray(int n, int m) {char[][] a = new char[n][m]; for(int i=0; i<n; i++) {char[] c = sc.next().toCharArray(); a[i] = c;} return a;}
-
-    private static void prtList(List<Integer> x) {for(int i : x) {System.out.print(i+" ");}}
-    private static void prtArr(int[] A) {for(int i=0;i<A.length;i++)System.out.print(A[i]+" ");}
-    private static void prtYesNo(boolean c) {System.out.println(c ? "Yes" : "No");} // {System.out.println(c ? "YES" : "NO");}
-
-    private static void debug(Object... o) {if(o.length != 0) System.err.println(Arrays.deepToString(o)); else System.err.println();}
-
-    // DecimalFormat df = new DecimalFormat("#.###");
-    // DecimalFormat df = new DecimalFormat(); df.setMaximumFractionDigits(12);
-    // System.out.println(df.format(input_Decimal_Here));
 
     // fastIO cos why not
     public static class FastScanner {
