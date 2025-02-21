@@ -8,7 +8,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class Problem_1_Milk_Pails {
+public class Main {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -25,14 +25,32 @@ public class Problem_1_Milk_Pails {
     static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        int x = fs.nextInt(), y = fs.nextInt(), m = fs.nextInt();
+        BufferedReader br = new BufferedReader(new FileReader("diamond.in"));
+        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("diamond.out")));
+        
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
+        
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(br.readLine());
+        }
+        
+        Arrays.sort(a);
+        
         int ans = 0;
-        for(int xPour = 0; xPour*x <= m; xPour++) {
-			for(int yPour = 0; xPour*x + yPour*y <= m; yPour++) {
-                ans = Math.max(ans, xPour*x + yPour*y);
-			}
-		}
-        out.print(ans);
+        for (int i = 0; i < n; i++) {
+            int amt = 0;
+            for (int j = i; j < n && a[j] <= a[i] + k; j++) {
+                amt++;
+            }
+            ans = Math.max(ans, amt);
+        }
+        
+        pw.println(ans);
+        br.close();
+        pw.close();
     }
 
     public static void main(String[] args) throws IOException { int t = 1; while(t-->0) sagnik(); out.flush(); }  // Make t = 1 baby

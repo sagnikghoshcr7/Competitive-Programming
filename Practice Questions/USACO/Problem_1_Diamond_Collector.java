@@ -8,7 +8,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.io.*;
 
-public class Problem_1_Milk_Pails {
+public class Problem_1_Diamond_Collector {
     static Scanner sc = new Scanner(System.in);
     static FastScanner fs = new FastScanner();
     static PrintWriter out = new PrintWriter(System.out);
@@ -25,13 +25,23 @@ public class Problem_1_Milk_Pails {
     static int cnt = 0, tmpSum = 0;
 
     private static void sagnik() throws IOException {
-        int x = fs.nextInt(), y = fs.nextInt(), m = fs.nextInt();
+        int n = fs.nextInt(), k = fs.nextInt();
+        int[] a = fs.setArray(n);
+
         int ans = 0;
-        for(int xPour = 0; xPour*x <= m; xPour++) {
-			for(int yPour = 0; xPour*x + yPour*y <= m; yPour++) {
-                ans = Math.max(ans, xPour*x + yPour*y);
+		for(int i = 0; i < n; i++) {
+			// list[i] will be the size of the smallest diamond in the case
+			int amt = 0;
+			for(int j = 0; j < n; j++) {
+				// loop over all diamonds, see if this diamond can be arranged with the selected one
+				if(a[j] >= a[i] && a[j] <= a[i] + k) {
+					amt++;
+				}
 			}
+
+            ans = Math.max(ans, amt);
 		}
+
         out.print(ans);
     }
 
